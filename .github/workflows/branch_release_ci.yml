@@ -1,0 +1,22 @@
+name: "Release Tests & Analysis"
+
+on:
+  pull_request:
+    branches: 
+      - 'release/**'
+    paths:
+      - 'src/api/*' 
+      - 'src/api/**'
+
+permissions:
+  checks: write
+  pull-requests: write
+
+jobs: 
+  tests:
+    name: Tests
+    uses: ./.github/workflows/matrix_test_result.yml
+    secrets: inherit
+    with:
+      dir: ./src/api/
+      dotnet-version: 6.0.x

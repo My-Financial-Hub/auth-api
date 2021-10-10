@@ -1,0 +1,28 @@
+name: "Main Tests & Analysis"
+
+on:
+  push:
+    branches: 
+      - 'main'
+    paths:
+      - 'src/api/*' 
+      - 'src/api/**'
+  pull_request:
+    branches: 
+      - 'main'
+    paths:
+      - 'src/api/*' 
+      - 'src/api/**'
+
+permissions:
+  checks: write
+  pull-requests: write
+
+jobs: 
+  tests:
+    name: Tests
+    uses: ./.github/workflows/matrix_test_result.yml
+    secrets: inherit
+    with:
+      dir: ./src/api/
+      dotnet-version: 6.0.x
